@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Moon Phases Explorer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>🌙 Moon Phases Explorer</h1>
+
+<div class="container">
+    <div class="moon" id="moon"></div>
+
+    <input type="range" min="0" max="100" value="0" id="phaseSlider">
+
+    <p id="phaseName">New Moon</p>
+</div>
+
+<!-- NAVIGATION BUTTONS -->
+<div class="nav-buttons">
+    <a href="https://science.nasa.gov/moon/moon-phases/"><button>🌑 Phases Details</button></a>
+    <a href="https://science.nasa.gov/moon/tides/"><button>🌊 Tides</button></a>
+    <a href="https://en.wikipedia.org/wiki/Eclipse"><button>🌘 Eclipses</button></a>
+    <a href="https://www.sciencing.com/1949705/coolest-moon-phenomena-night-sky/"><button>✨ Phenomena</button></a>
+</div>
+
+<!-- INFO SECTION -->
+<div class="info-section">
+
+    <div class="info-box">
+        <h2>🌑 Why the Moon Changes Phases</h2>
+        <p>
+            The Moon reflects sunlight. As it orbits Earth, we see different parts
+            of its lit side, creating phases over ~29.5 days.
+        </p>
+    </div>
+
+    <div class="info-box">
+        <h2>🌓 Main Phases</h2>
+        <ul>
+            <li><strong>New Moon</strong></li>
+            <li><strong>First Quarter</strong></li>
+            <li><strong>Full Moon</strong></li>
+            <li><strong>Last Quarter</strong></li>
+        </ul>
+    </div>
+
+    <div class="info-box">
+        <h2>🌊 Tides</h2>
+        <p>
+            The Moon’s gravity causes ocean tides. Strongest during full and new moons.
+        </p>
+    </div>
+
+    <div class="info-box">
+        <h2>🌘 Eclipses</h2>
+        <p>
+            Occur when the Sun, Earth, and Moon align.
+        </p>
+    </div>
+
+    <div class="info-box">
+        <h2>✨ Phenomena</h2>
+        <p>
+            Includes supermoons, blue moons, and blood moons.
+        </p>
+    </div>
+
+</div>
+
+<script>
+const moon = document.getElementById("moon");
+const slider = document.getElementById("phaseSlider");
+const phaseName = document.getElementById("phaseName");
+
+function updateMoon(value) {
+    let shadow = 50 - value / 2;
+    moon.style.boxShadow = `inset ${shadow}px 0 0 black`;
+
+    if (value == 0) phaseName.textContent = "New Moon";
+    else if (value < 25) phaseName.textContent = "Waxing Crescent";
+    else if (value == 25) phaseName.textContent = "First Quarter";
+    else if (value < 50) phaseName.textContent = "Waxing Gibbous";
+    else if (value == 50) phaseName.textContent = "Full Moon";
+    else if (value < 75) phaseName.textContent = "Waning Gibbous";
+    else if (value == 75) phaseName.textContent = "Last Quarter";
+    else phaseName.textContent = "Waning Crescent";
+}
+
+slider.addEventListener("input", () => {
+    updateMoon(slider.value);
+});
+
+updateMoon(0);
+</script>
+
+</body>
+</html>
